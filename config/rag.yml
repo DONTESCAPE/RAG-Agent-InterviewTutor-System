@@ -1,0 +1,5 @@
+chat_model_name: qwen3-max
+embedding_model_name: text-embedding-v4
+enable_rerank: true
+rerank_model_name: gte-rerank-v2
+rerank_recall_k: 12

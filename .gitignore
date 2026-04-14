@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+*.log
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+
+# Streamlit
+.streamlit/
+
+# Environment variables
+.env
+.env.*
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+
+# Test / cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Notebook
+.ipynb_checkpoints/
+
+# Local data and generated artifacts
+# 按需保留，如果你希望将部分样例数据上传到 GitHub，可以手动取消注释
+# data/user_histories/
+# data/external/
+# data/vectorstore/
+# chroma/
+# db/
+
+# OS files
+Thumbs.db
+.DS_Store

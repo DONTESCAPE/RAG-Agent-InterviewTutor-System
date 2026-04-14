@@ -1,0 +1,4 @@
+external_data_path: data/external/records.csv
+amap_key: ""
+amap_ip_api: "https://restapi.amap.com/v3/ip"
+amap_weather_api: "https://restapi.amap.com/v3/weather/weatherInfo"
