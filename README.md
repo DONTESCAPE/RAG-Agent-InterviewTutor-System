@@ -58,8 +58,6 @@ InterviewAssistantService
 ```text
 .
 ├─ app.py                          # Streamlit 主入口（扁平版界面）
-├─ streamlit_app.py                # 另一套 Streamlit 入口
-├─ streamlit_app_flat.py           # 扁平化界面入口
 ├─ agent/
 │  ├─ agent_tools.py               # Agent 工具函数
 │  └─ interview_assistant_service.py # 面试助手核心服务
