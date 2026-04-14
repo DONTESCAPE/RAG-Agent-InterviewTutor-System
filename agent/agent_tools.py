@@ -119,24 +119,3 @@ def get_city():
 @tool(description="获取用户的ID,以纯字符串形式返回")
 def get_id():
     return os.getenv("CURRENT_USER_ID", "guest")
-
-@tool(description="获取当前月份，以纯字符串形式返回")
-def get_current_month():
-    return datetime.now().strftime("%Y-%m")
-
-@tool(description="从外部系统中获取指定用户在指定月份的使用记录，以纯字符串形式返回，如果未检索到返回空值")
-def fetch_external_data(user_id,month):
-    csv_path = get_abs_path(agent_conf.get("external_data_path", "data/external/records.csv"))
-    if not os.path.exists(csv_path):
-        return ""
-
-    records = []
-    with open(csv_path, "r", encoding="utf-8") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            if str(row.get("user_id", "")).strip() == str(user_id).strip() and str(row.get("month", "")).strip() == str(month).strip():
-                records.append(row)
-
-    if not records:
-        return ""
-    return str(records)
