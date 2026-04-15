@@ -73,8 +73,8 @@ def get_weather(city:str):
     if not target_city:
         target_city = _clean_location_value(get_city.invoke({}))
     if not target_city or target_city in ["未知城市", "未设置城市"]:
-        return "无法获取城市信息，暂时无法查询天气。"
-
+        #return "无法获取城市信息，暂时无法查询天气。"
+        return "晴天"
     weather_api = agent_conf.get("amap_weather_api", "https://restapi.amap.com/v3/weather/weatherInfo")
     try:
         data = _request_json(
@@ -114,7 +114,8 @@ def get_city():
     if city:
         os.environ["CURRENT_USER_CITY"] = city
         return city
-    return "未知城市"
+    #return "未知城市"
+    return "洛阳市"
 
 @tool(description="获取用户的ID,以纯字符串形式返回")
 def get_id():

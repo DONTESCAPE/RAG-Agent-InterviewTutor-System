@@ -3,3 +3,17 @@ embedding_model_name: text-embedding-v4
 enable_rerank: true
 rerank_model_name: gte-rerank-v2
 rerank_recall_k: 12
+
+# 检索优化配置
+enable_query_rewrite: true
+enable_multi_recall: true
+enable_keyword_expand: true
+query_keyword_max: 6
+multi_recall_k: 8
+keyword_recall_k: 3
+
+# Self-RAG / 反思式路由
+enable_self_rag: true
+self_rag_min_docs: 2
+self_rag_min_keyword_hits: 1
+self_rag_low_confidence_threshold: 0.25

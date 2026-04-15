@@ -33,10 +33,13 @@ def load_user_state(user_id: str) -> Dict:
             "interview_started": False,
             "interview_finished": False,
             "interview_report": "",
+            "interview_state": {},
         }
 
     with open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+        data.setdefault("interview_state", {})
+        return data
 
 
 def save_user_state(user_id: str, state: Dict) -> None:
@@ -48,6 +51,7 @@ def save_user_state(user_id: str, state: Dict) -> None:
         "interview_started": state.get("interview_started", False),
         "interview_finished": state.get("interview_finished", False),
         "interview_report": state.get("interview_report", ""),
+        "interview_state": state.get("interview_state", {}),
     }
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
