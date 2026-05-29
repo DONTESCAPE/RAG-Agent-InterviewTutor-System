@@ -79,13 +79,12 @@ class InterviewAssistantService:
             state = self.state_machine.update_current_question(state, next_question, is_followup=False)
             reply = next_question
             if action.action == "first_question":
-                reply = f"你好，我们先从这个岗位开始。{next_question}"
+                reply = f"你好，{next_question}"
             return {"reply": reply, "state": state, "action": action.action}
 
         if action.action == "follow_up":
             role = state.get("target_role", "")
-            keywords = self.role_manager.get_role_keywords(role)
-            follow_up = self._build_follow_up_question(current_question, keywords, history)
+            follow_up = self._build_follow_up_question(user_input, current_question, role, history)
             state = self.state_machine.update_current_question(state, follow_up, is_followup=True)
             return {"reply": follow_up, "state": state, "action": action.action}
 
@@ -177,10 +176,13 @@ class InterviewAssistantService:
                     return content
         return "请先开始本次模拟面试。"
 
-    @staticmethod
-    def _build_follow_up_question(current_question: str, keywords: List[str], history: List[dict]) -> str:
-        focus = keywords[0] if keywords else "关键实现"
-        return f"好的，我继续追问一下：在刚才这个问题里，你是如何处理{focus}的？"
+    def _build_follow_up_question(self, user_input: str, current_question: str, role: str, history: List[dict]) -> str:
+        focus = self.policy.extract_followup_focus(user_input, current_question, history)
+        role_keywords = self.role_manager.get_role_keywords(role)
+        role_focus = role_keywords[0] if role_keywords else "关键实现"
+        if focus and focus != "关键实现":
+            return f"你刚才提到了{focus}，我想继续追问一下：你是怎么把这个点落地到实际项目里的？"
+        return f"好的，我继续追问一下：在刚才这个问题里，你是如何处理{role_focus}的？"
 
     def generate_report(self, interview_history: List[dict], interview_questions: List[str]) -> str:
         full_log = []
